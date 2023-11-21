@@ -3,6 +3,8 @@ import os
 
 import openpyxl
 
+from config import USERS
+
 
 # Загружаем данные из JSON файла
 filepath = os.path.join("data", "file_finish.json")
@@ -20,7 +22,7 @@ sheet['A1'] = 'DATE'
 sheet['B1'] = 'ALL'
 sheet['C1'] = 'IT'
 row_index = 2
-users = ['Дмитрий Атласов', 'Кирилл Терешенков', 'Андрей Лапин', 'Артём Кениг']
+
 # Итерируемся по данным и создаем листы для каждой даты
 for date, data in users_data.items():
 
@@ -28,7 +30,7 @@ for date, data in users_data.items():
     sheet[f'B{row_index}'] = data['total_tasks']
     # Заполняем лист данными
     
-    tasks_count = sum([tasks_count for employee, tasks_count in data['employees'].items() if employee in users])
+    tasks_count = sum([tasks_count for employee, tasks_count in data['employees'].items() if employee in USERS])
     sheet[f'C{row_index}'] = tasks_count   
     row_index += 1
 
